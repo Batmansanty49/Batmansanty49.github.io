@@ -1,0 +1,927 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Santiago Ruiz - Portfolio & Blog</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600&family=Playwrite+IS:wght@100..400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        /* --- COLOR VARIABLES ---*/
+        :root {
+            --text-main: #333333;
+            --text-light: #777777;
+            --bg-color: #ffffff;
+            --bg-sidebar: #f4f4f4;
+            --accent-color: #d5b3e6;
+            --accent-dark: #b886d3; 
+            --border-color: #eeeeee;
+            
+            --sch-blue: #2196F3;
+            --sch-green: #b2f2bb;
+            --sch-lightblue: #a5d8ff;
+            --sch-orange: #ffd8a8;
+            --sch-yellow: #ffec99;
+            --sch-lightyellow: #fff3bf;
+            --sch-pink: #ffc9c9;
+            --sch-purple: #e5dbff;
+            --sch-magenta: #eebefa;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            color: var(--text-main);
+            background-color: var(--bg-color);
+            line-height: 1.6;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        /* --- HEADER & LOGO --- */
+        header {
+            text-align: center;
+            padding: 40px 20px 20px;
+        }
+
+        .logo-container {
+            position: relative;
+            display: inline-block;
+            margin-bottom: 30px;
+        }
+
+        .logo-bg {
+            position: absolute;
+            top: 20px;
+            left: -10px;
+            right: -10px;
+            height: 30px;
+            background-color: var(--accent-color);
+            z-index: -1;
+            transform: rotate(-2deg);
+            opacity: 0.7;
+        }
+
+        .logo-text {
+            font-family: 'Playwrite IS', cursive;
+            font-size: 3rem;
+            color: #222;
+        }
+
+        .logo-sub {
+            font-size: 0.9rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--text-light);
+        }
+
+        /* --- MAIN NAVIGATION --- */
+        .top-nav {
+            border-top: 1px solid var(--border-color);
+            border-bottom: 1px solid var(--border-color);
+            padding: 15px 0;
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            margin-bottom: 50px;
+        }
+
+        .nav-link {
+            font-size: 0.85rem;
+            font-weight: 600;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: color 0.3s;
+        }
+
+        .nav-link:hover, .nav-link.active {
+            color: #000;
+            border-bottom: 2px solid #000;
+            padding-bottom: 2px;
+        }
+
+        /* --- MAIN CONTAINER (GRID) --- */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            gap: 50px;
+            padding: 0 20px;
+        }
+
+        .main-content {
+            flex: 1; 
+            min-height: 600px;
+        }
+
+        .sidebar {
+            width: 300px; 
+        }
+
+        /* --- TABS & SECTIONS --- */
+        .tab-section {
+            display: none;
+            animation: fadeIn 0.4s ease-in-out;
+        }
+
+        .tab-section.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .section-title {
+            font-size: 1.2rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 30px;
+            font-weight: 600;
+        }
+
+        /* --- HOME: ARTICLE CARDS --- */
+        .articles-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+        }
+
+        .article-card {
+            cursor: pointer;
+        }
+
+        .article-card img {
+            width: 100%;
+            height: 350px;
+            object-fit: cover;
+            margin-bottom: 15px;
+            transition: opacity 0.3s;
+        }
+
+        .article-card:hover img {
+            opacity: 0.8;
+        }
+
+        .article-card h3 {
+            font-size: 1rem;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            margin-bottom: 10px;
+        }
+
+        .article-card p {
+            color: var(--text-light);
+            font-size: 0.9rem;
+        }
+
+        /* --- FULL ARTICLE VIEW --- */
+        .full-article img {
+            width: 100%;
+            height: 450px;
+            object-fit: cover;
+            margin-bottom: 30px;
+        }
+
+        .full-article p {
+            margin-bottom: 20px;
+            font-size: 1.05rem;
+            color: #444;
+        }
+
+        .back-btn {
+            display: inline-block;
+            margin-bottom: 30px;
+            font-weight: 600;
+            font-size: 0.85rem;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            cursor: pointer;
+            color: var(--text-light);
+            border-bottom: 1px solid transparent;
+            transition: all 0.3s;
+        }
+
+        .back-btn:hover {
+            color: #000;
+            border-bottom: 1px solid #000;
+        }
+
+        /* --- SIDEBAR --- */
+        .widget {
+            margin-bottom: 40px;
+            text-align: center;
+        }
+
+        .widget h4 {
+            font-size: 0.9rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 20px;
+        }
+
+        .profile-img {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-bottom: 15px;
+        }
+
+        .profile-bio {
+            font-size: 0.85rem;
+            color: var(--text-light);
+            line-height: 1.8;
+        }
+
+        .social-icons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin: 20px 0;
+        }
+
+        .social-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: var(--bg-sidebar);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            color: var(--text-main);
+            transition: all 0.3s;
+        }
+
+        .social-icon:hover {
+            background-color: var(--accent-color);
+            transform: translateY(-3px);
+        }
+
+        /* --- WIDGET WEBGL --- */
+        .webgl-widget {
+            background-color: var(--bg-sidebar);
+            padding: 20px;
+            border-radius: 10px;
+        }
+
+        .webgl-widget h4 {
+            margin-bottom: 10px;
+        }
+
+        .webgl-widget p {
+            font-size: 0.75rem;
+            color: var(--text-light);
+            margin-bottom: 15px;
+            font-style: italic;
+        }
+
+        #canvas-container {
+            width: 100%;
+            height: 200px;
+            background: linear-gradient(135deg, #ffffff, #f0f0f0);
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: inset 0 2px 10px rgba(0,0,0,0.05);
+            cursor: grab;
+        }
+
+        #canvas-container:active {
+            cursor: grabbing;
+        }
+
+        /* --- TECH STACK CV --- */
+        .tech-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            justify-content: center;
+        }
+
+        .tech-tag {
+            background-color: #ffffff;
+            border: 1px solid var(--border-color);
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: var(--text-main);
+            transition: all 0.2s;
+        }
+
+        .tech-tag:hover {
+            background-color: var(--text-main);
+            color: #ffffff;
+        }
+
+        /* --- ANIMATED SKILLS WIDGET --- */
+        .interactive-skills-widget {
+            background-color: var(--bg-sidebar);
+            padding: 30px 20px;
+            border-radius: 10px;
+            text-align: left;
+        }
+        
+        .interactive-skills-widget h4 {
+            text-align: center;
+            margin-bottom: 5px;
+        }
+        
+        .hover-hint {
+            font-size: 0.7rem;
+            color: var(--text-light);
+            text-align: center;
+            margin-bottom: 20px;
+            font-style: italic;
+        }
+
+        .skill-list {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .skill-item {
+            cursor: default;
+        }
+
+        .skill-info {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-bottom: 6px;
+        }
+
+        .skill-name {
+            transition: color 0.3s;
+        }
+
+        .skill-pct {
+            opacity: 0; 
+            transform: translateX(-10px);
+            transition: all 0.4s ease;
+            color: var(--accent-dark);
+        }
+
+        .skill-bar {
+            width: 100%;
+            height: 6px;
+            background-color: #e2e2e2;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .skill-fill {
+            width: 0%; 
+            height: 100%;
+            background-color: var(--accent-dark);
+            border-radius: 10px;
+            transition: width 1.2s cubic-bezier(0.1, 0.5, 0.1, 1);
+        }
+
+        .interactive-skills-widget:hover .skill-fill {
+            width: var(--target-width);
+        }
+        
+        .interactive-skills-widget:hover .skill-pct {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .skill-item:hover .skill-name {
+            color: var(--accent-dark);
+        }
+
+        /* --- OTRAS SECCIONES --- */
+        .info-block { margin-bottom: 30px; }
+        .info-block h3 { margin-bottom: 10px; font-size: 1.1rem; }
+        
+        /* --- HORARIO ESTILO BLOQUES --- */
+        .schedule-wrapper { overflow-x: auto; }
+        .schedule-table {
+            width: 100%;
+            min-width: 700px;
+            border-collapse: separate;
+            border-spacing: 4px;
+            margin-top: 20px;
+            font-size: 0.8rem;
+        }
+        .schedule-table th {
+            padding: 10px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--text-light);
+            border-bottom: 2px solid var(--border-color);
+        }
+        .time-col {
+            text-align: right;
+            padding-right: 10px;
+            font-weight: 600;
+            color: var(--text-light);
+            width: 60px;
+            vertical-align: top;
+            padding-top: 5px;
+        }
+        .sched-block {
+            border-radius: 8px;
+            padding: 10px;
+            text-align: left;
+            vertical-align: top;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+            transition: transform 0.2s;
+        }
+        .sched-block:hover {
+            transform: scale(1.02);
+            z-index: 10;
+        }
+        .sched-block strong {
+            display: block;
+            margin-bottom: 5px;
+            font-size: 0.85rem;
+        }
+        .empty-block { background-color: transparent; }
+
+        .bg-blue { background-color: var(--sch-blue); color: white; }
+        .bg-green { background-color: var(--sch-green); color: #1b5e20; }
+        .bg-lightblue { background-color: var(--sch-lightblue); color: #0d47a1; }
+        .bg-orange { background-color: var(--sch-orange); color: #e65100; }
+        .bg-yellow { background-color: var(--sch-yellow); color: #f57f17; }
+        .bg-lightyellow { background-color: var(--sch-lightyellow); color: #827717; }
+        .bg-pink { background-color: var(--sch-pink); color: #b71c1c; }
+        .bg-purple { background-color: var(--sch-purple); color: #4a148c; }
+        .bg-magenta { background-color: var(--sch-magenta); color: #880e4f; }
+
+        /* --- CV ESTILOS --- */
+        .cv-section-title {
+            font-size: 1.1rem;
+            border-bottom: 2px solid var(--border-color);
+            padding-bottom: 5px;
+            margin: 25px 0 15px 0;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        .cv-item { margin-bottom: 20px; }
+        .cv-item h4 { font-size: 1.05rem; margin-bottom: 5px; }
+        .cv-item .date {
+            font-size: 0.85rem;
+            color: var(--text-light);
+            margin-bottom: 5px;
+            font-weight: 600;
+        }
+        .download-btn {
+            display: inline-block;
+            background-color: #000;
+            color: #fff;
+            padding: 15px 30px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            font-size: 0.9rem;
+            transition: background 0.3s;
+            cursor: pointer;
+            border: none;
+            margin-top: 20px;
+        }
+        .download-btn:hover { background-color: var(--text-light); }
+
+        footer {
+            border-top: 1px solid var(--border-color);
+            margin-top: 50px;
+            padding: 40px 0;
+            text-align: center;
+            background-color: #fafafa;
+        }
+
+        @media (max-width: 850px) {
+            .container { flex-direction: column; }
+            .sidebar { width: 100%; }
+            .articles-grid { grid-template-columns: 1fr; }
+            .top-nav { flex-wrap: wrap; gap: 20px; }
+        }
+        /* --- ESTILOS PARA LOS BOTONES 3D --- */
+        .model-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 15px;
+        }
+
+        .model-btn {
+            background-color: var(--bg-color);
+            border: 1px solid var(--border-color);
+            padding: 5px 15px;
+            border-radius: 15px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: var(--text-light);
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .model-btn:hover {
+            border-color: var(--accent-dark);
+            color: var(--accent-dark);
+        }
+
+        .model-btn.active {
+            background-color: var(--accent-dark);
+            color: white;
+            border-color: var(--accent-dark);
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="logo-container">
+            <div class="logo-bg"></div>
+            <h1 class="logo-text">Santiago Ruiz</h1>
+            <div class="logo-sub">Computer Engineering</div>
+        </div>
+    </header>
+
+    <nav class="top-nav">
+        <div class="nav-link active" onclick="changeTab('home')">Home</div>
+        <div class="nav-link" onclick="changeTab('info')">Personal Info</div>
+        <div class="nav-link" onclick="changeTab('schedule')">Schedule</div>
+        <div class="nav-link" onclick="changeTab('cv')">CV</div>
+    </nav>
+
+    <div class="container">
+        
+        <main class="main-content">
+            
+            <section id="home" class="tab-section active">
+                <h2 class="section-title">Featured Topics:</h2>
+                <div class="articles-grid">
+                    <div class="article-card" onclick="changeTab('article-6g')">
+                        <img src="https://images.unsplash.com/photo-1544197150-b99a580bb7a8?auto=format&fit=crop&q=80&w=600" alt="6G Network abstract">
+                        <h3>All about 6G Network</h3>
+                        <p>Explore the future of connectivity, ultra-fast speeds, and the integration of AI in sixth-generation networks.</p>
+                    </div>
+                    <div class="article-card" onclick="changeTab('article-srv6')">
+                        <img src="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&q=80&w=600" alt="Network servers">
+                        <h3>All about SRv6</h3>
+                        <p>A deep dive into Segment Routing over IPv6, simplifying network processing and improving scalability.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section id="article-6g" class="tab-section full-article">
+                <div class="back-btn" onclick="changeTab('home')">&larr; Back to Home</div>
+                <h2 class="section-title">All about 6G Network</h2>
+                <img src="https://images.unsplash.com/photo-1544197150-b99a580bb7a8?auto=format&fit=crop&q=80&w=1200" alt="6G Network Hero Image">
+                <p>The sixth generation of mobile networks, commonly known as 6G, is currently under development. It promises to drastically outperform 5G networks in terms of speed, latency, and capacity. While 5G is built primarily for connecting people and things, 6G is expected to bridge the gap between the physical, digital, and human worlds.</p>
+                <p>Key expected features include terahertz (THz) frequency utilization, artificial intelligence (AI) natively integrated into the network architecture, and advanced edge computing. This will enable applications such as deeply immersive extended reality (XR), high-fidelity holographic communications, and autonomous systems operating with zero-latency synchronization.</p>
+            </section>
+
+            <section id="article-srv6" class="tab-section full-article">
+                <div class="back-btn" onclick="changeTab('home')">&larr; Back to Home</div>
+                <h2 class="section-title">All about SRv6</h2>
+                <img src="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&q=80&w=1200" alt="SRv6 Servers Hero Image">
+                <p>Segment Routing over IPv6 (SRv6) is an advanced routing architecture designed to simplify network programming and operation. Unlike traditional routing protocols that rely heavily on complex state maintenance across the network, SRv6 encodes the routing path directly into the packet header as a list of segments.</p>
+                <p>By leveraging the existing IPv6 architecture, SRv6 eliminates the need for protocols like MPLS or LDP. It offers unparalleled programmability, allowing network engineers to define precise paths for traffic engineering, service chaining, and VPNs with incredible efficiency. It represents a major leap towards more scalable and automated infrastructure.</p>
+            </section>
+
+            <section id="info" class="tab-section">
+                <h2 class="section-title">Personal Info</h2>
+                <div class="info-block">
+                    <h3>Who you are</h3>
+                    <p>I am a 21-year-old who enjoys learning, spending time with my family and loved ones, and being able to live beyond my studies and enjoy my days.</p>
+                </div>
+                <div class="info-block">
+                    <h3>What do you like</h3>
+                    <p>I like to model in Blender, create animations, as well I enjoy practice multiple sports, playing video games, play with my dogs and cook food from all the world.</p>
+                </div>
+                <div class="info-block">
+                    <h3>Hobbies</h3>
+                    <p>I enjoy practicing a martial art called haidong gumdo. I have been practicing it for over five years. I also enjoy drawing and spending time with my friends and family.</p>
+                </div>
+            </section>
+
+            <section id="schedule" class="tab-section">
+                <h2 class="section-title">Personal Schedule</h2>
+                
+                <div class="schedule-wrapper">
+                    <table class="schedule-table">
+                        <thead>
+                            <tr>
+                                <th></th> <th>Mon</th>
+                                <th>Tue</th>
+                                <th>Wed</th>
+                                <th>Thu</th>
+                                <th>Fri</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="time-col">7am</td>
+                                <td rowspan="4" class="sched-block bg-blue"><strong>7:00 - 11:00</strong>Social Service<br></td> <td rowspan="4" class="sched-block bg-blue"><strong>7:00 - 11:00</strong>Social Service<br></td> <td rowspan="4" class="sched-block bg-blue"><strong>7:00 - 11:00</strong>Social Service<br></td> <td rowspan="2" class="sched-block bg-yellow"><strong>7:00 - 9:00</strong>Microcomputer Laboratory<br></td> <td rowspan="4" class="sched-block bg-blue"><strong>7:00 - 11:00</strong>Social Service<br></td> </tr>
+                            <tr><td class="time-col">8am</td></tr>
+                            <tr>
+                                <td class="time-col">9am</td>
+                                <td rowspan="2" class="sched-block bg-magenta"><strong>9:00 - 11:00</strong>Secure Data Networks Laboratory<br></td> </tr>
+                            <tr><td class="time-col">10am</td></tr>
+                            <tr>
+                                <td class="time-col">11am</td>
+                                <td rowspan="2" class="sched-block bg-green"><strong>11:00 - 1:00</strong>Distributed Sistems<br></td> <td rowspan="2" class="sched-block bg-lightblue"><strong>11:00 - 1:00</strong>Mexico's resources and needs<br></td> <td rowspan="4" class="empty-block"></td><td rowspan="2" class="sched-block bg-lightblue"><strong>11:00 - 1:00</strong>Mexico's resources and needs<br></td> <td rowspan="2" class="sched-block bg-green"><strong>11:00 - 1:00</strong>Distributed Systems<br></td> </tr>
+                            <tr><td class="time-col">12pm</td></tr>
+                            <tr>
+                                <td class="time-col">1pm</td>
+                                <td rowspan="4" class="empty-block"></td> <td rowspan="2" class="sched-block bg-orange"><strong>1:00 - 3:00</strong>Compilers<br></td> <td rowspan="2" class="sched-block bg-orange"><strong>1:00 - 3:00</strong>Compilers<br></td> <td rowspan="8" class="empty-block"></td> </tr>
+                            <tr><td class="time-col">2pm</td></tr>
+                            <tr>
+                                <td class="time-col">3pm</td>
+                                <td rowspan="2" class="sched-block bg-lightyellow"><strong>3:00 - 5:00</strong>Microcomputer<br></td> <td rowspan="6" class="empty-block"></td> <td rowspan="2" class="sched-block bg-lightyellow"><strong>3:00 - 5:00</strong>Microcomputer<br></td> </tr>
+                            <tr><td class="time-col">4pm</td></tr>
+                            <tr>
+                                <td class="time-col">5pm</td>
+                                <td rowspan="2" class="sched-block bg-pink"><strong>5:00 - 7:00</strong>Creativity<br>Room / Status</td> <td rowspan="2" class="empty-block"></td> <td rowspan="2" class="empty-block"></td> </tr>
+                            <tr><td class="time-col">6pm</td></tr>
+                            <tr>
+                                <td class="time-col">7pm</td>
+                                <td rowspan="2" class="sched-block bg-purple"><strong>7:00 - 9:00</strong>Secure Data Networks<br></td> <td rowspan="2" class="sched-block bg-purple"><strong>7:00 - 9:00</strong>Secure Data Networks<br></td> <td rowspan="2" class="sched-block bg-purple"><strong>7:00 - 9:00</strong>Secure Data Networks<br></td> </tr>
+                            <tr><td class="time-col">8pm</td></tr>
+                            <tr><td class="time-col">9pm</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <section id="cv" class="tab-section">
+                <h2 class="section-title">Curriculum Vitae</h2>
+                
+                <h3 class="cv-section-title">Summary</h3>
+                <p>I am an 8th semester student of Computer Engineering at the Faculty of Engineering of the National Autonomous University of Mexico (UNAM). I also have 1 year and 8 months of work experience, having worked as an intern at Ketoro, developing software and improving my soft skills, such as teamwork and communication.</p>
+
+                <h3 class="cv-section-title">Education</h3>
+                <div class="cv-item">
+                    <h4>Computer Engineering</h4>
+                    <p class="date">UNAM, Faculty of Engineering | 8th Semester (Current)</p>
+                </div>
+                <div class="cv-item">
+                    <h4>Scrum Fundamentals Certified</h4>
+                    <p class="date">Certification in SCRUM Fundamentals Certificate ID: 998435</p>
+                </div>
+                <div class="cv-item">
+                    <h4>Course Swift</h4>
+                    <p class="date">Basic learning of the Swift language</p>
+                </div>
+                <div class="cv-item">
+                    <h4>Robotics Course at the Robotics Association</h4>
+                    <p class="date">Learning electronics, Arduino, and sensors</p>
+                </div>
+
+                <h3 class="cv-section-title">Professional Experience</h3>
+                <div class="cv-item">
+                    <h4>Software Development Intern</h4>
+                    <p class="date">Ketoro | Duration: 1 year, 8 months</p>
+                    <p>I have been an intern at the company for over a year and a half, I have helped develop a platform dedicated to the sale of air services between wholesale and retail companies. In my specific case, I developed the formats to automate quotes, invoices, and service relationships. I have also helped manage and maintain the bed bank database, and I am developing an AI agent capable of performing quotes and tax processes in minutes.</p>
+                </div>
+
+                <h3 class="cv-section-title">Relevant Projects</h3>
+                <div class="cv-item">
+                    <h4>Endangered Species Virtual Museum</h4>
+                    <p>Interactive application developed using C++ and OpenGL to display educational content about Mexican wildlife.</p>
+                </div>
+                <div class="cv-item">
+                    <h4>Structural modeling of human anatomy</h4>
+                    <p>Development of a 3D model of the human body using Blender and C++ for educational purposes.</p>
+                </div>
+                <div class="cv-item">
+                    <h4>HTML to PDF converter for tax invoice templates </h4>
+                    <p>Development of a tool that converts HTML templates into PDF format for tax invoices, using JavaScript and Node.js.</p>
+                </div>
+                <div class="cv-item">
+                    <h4>Development of a cooking recipe app with computer graphics</h4>
+                    <p>Development of a cooking recipe application with 3D graphics using Blender, Unity and Figma.</p>
+                </div>
+
+                <h3 class="cv-section-title">Technical Skills</h3>
+                <div class="tech-tags" style="justify-content: flex-start; margin-top: 10px;">
+                    <span class="tech-tag">Blender</span>
+                    <span class="tech-tag">OpenGL</span>
+                    <span class="tech-tag">C++ / C#</span>
+                    <span class="tech-tag">HTML</span>
+                    <span class="tech-tag">Python</span>
+                    <span class="tech-tag">Swift</span>
+                </div>
+                <h3 class="cv-section-title">Soft Skills</h3>
+                <div class="tech-tags" style="justify-content: flex-start; margin-top: 10px;">
+                    <span class="tech-tag">Teamwork</span>
+                    <span class="tech-tag">Communication</span>
+                    <span class="tech-tag">Problem Solving</span>
+                    <span class="tech-tag">Adaptability</span>
+                    <span class="tech-tag">Leadership</span>
+                    <span class="tech-tag">Time Management</span>
+                </div>
+                <h3 class="cv-section-title">Languages</h3>
+                <div class="tech-tags" style="justify-content: flex-start; margin-top: 10px;">
+                    <span class="tech-tag">Spanish (native)</span>
+                    <span class="tech-tag">English (advanced)</span>
+                </div>
+                
+                <br>
+                <a href="Docs/Ruiz_Ramirez_Santiago_CV.pdf" class="download-btn" download>Download PDF Resume</a>
+            </section>
+
+        </main>
+
+        <aside class="sidebar">
+            <div class="widget">
+                <h4>Welcome!</h4>
+                <img src="Docs/FotoPerfil.jpeg" alt="Profile picture" class="profile-img">
+                <p class="profile-bio">
+                    Hi, I'm Santiago! I'm a Computer Engineering student with a passion for graphics computing and technology. This is my personal page where I share projects, thoughts and a little bit of my personal life. Thanks for stopping by!
+                </p>
+            </div>
+
+            <div class="widget">
+                <div class="social-icons">
+                    <a href="mailto:sruizramirez.is@gmail.com" class="social-icon" target="_blank" title="Email"><i class="fa-solid fa-envelope"></i></a>
+                    <a href="https://wa.me/5583191298" class="social-icon" target="_blank" title="WhatsApp"><i class="fa-brands fa-whatsapp"></i></a>
+                    <a href="https://www.linkedin.com/in/ruiz-ramirez-santiago-cdmx/" class="social-icon" target="_blank" title="LinkedIn"><i class="fa-brands fa-linkedin"></i></a>
+                    <a href="https://github.com/Batmansanty49" class="social-icon" target="_blank" title="GitHub"><i class="fa-brands fa-github"></i></a>
+                </div>
+            </div>
+
+            <div class="widget webgl-widget">
+                <h4>Some of 3D Work in Blender!</h4>
+                <p>Drag to rotate!</p>
+                <div id="canvas-container"></div>
+                
+                <div class="model-buttons" id="model-controls">
+                    <button class="model-btn active" data-index="0">Model 1</button>
+                    <button class="model-btn" data-index="1">Model 2</button>
+                    <button class="model-btn" data-index="2">Model 3</button>
+                </div>
+            </div>
+
+        </aside>
+
+    </div>
+
+    <footer>
+        <div class="social-icons">
+            <a href="mailto:sruizramirez.is@gmail.com" class="social-icon" target="_blank"><i class="fa-solid fa-envelope"></i></a>
+            <a href="https://wa.me/5583191298" class="social-icon" target="_blank"><i class="fa-brands fa-whatsapp"></i></a>
+            <a href="https://www.linkedin.com/in/ruiz-ramirez-santiago-cdmx/" class="social-icon" target="_blank"><i class="fa-brands fa-linkedin"></i></a>
+            <a href="https://github.com/Batmansanty49" class="social-icon" target="_blank"><i class="fa-brands fa-github"></i></a>
+        </div>
+    </footer>
+
+    <script>
+        function changeTab(tabId) {
+            const sections = document.querySelectorAll('.tab-section');
+            sections.forEach(section => section.classList.remove('active'));
+
+            const links = document.querySelectorAll('.nav-link');
+            links.forEach(link => link.classList.remove('active'));
+
+            document.getElementById(tabId).classList.add('active');
+
+            const activeLink = Array.from(links).find(link => link.getAttribute('onclick').includes(tabId));
+            if(activeLink) {
+                activeLink.classList.add('active');
+            } else if (tabId.includes('article')) {
+                links[0].classList.add('active');
+            }
+            
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+    </script>
+
+    <link rel="icon" href="data:,">
+
+    <script type="importmap">
+        {
+            "imports": {
+                "three": "https://unpkg.com/three@0.160.0/build/three.module.js",
+                "three/addons/": "https://unpkg.com/three@0.160.0/examples/jsm/"
+            }
+        }
+    </script>
+
+    <script type="module">
+        import * as THREE from 'three';
+        import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
+
+        const container = document.getElementById('canvas-container');
+        
+        const scene = new THREE.Scene();
+        const camera = new THREE.PerspectiveCamera(75, container.clientWidth / container.clientHeight, 0.1, 1000);
+        camera.position.z = 5; 
+
+        const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
+        renderer.setSize(container.clientWidth, container.clientHeight);
+        renderer.setPixelRatio(window.devicePixelRatio);
+        container.appendChild(renderer.domElement);
+
+        const ambientLight = new THREE.AmbientLight(0xffffff, 1.0); 
+        scene.add(ambientLight);
+        
+        const directionalLight = new THREE.DirectionalLight(0xffffff, 1.0); 
+        directionalLight.position.set(10, 20, 10);
+        scene.add(directionalLight);
+
+        const objectGroup = new THREE.Group();
+        scene.add(objectGroup);
+
+        const fallbackGeo = new THREE.TorusKnotGeometry(1.5, 0.4, 100, 16);
+        const fallbackMat = new THREE.MeshBasicMaterial({ color: 0xb886d3, wireframe: true });
+        const fallbackMesh = new THREE.Mesh(fallbackGeo, fallbackMat);
+        
+        const modelPaths = ['./mi_modelo.glb', './mi_modelo2.glb', './mi_modelo3.glb'];
+        const loader = new GLTFLoader();
+
+        function loadModel(index) {
+            while(objectGroup.children.length > 0){
+                objectGroup.remove(objectGroup.children[0]);
+            }
+            
+            objectGroup.add(fallbackMesh);
+
+            loader.load(modelPaths[index], function(gltf) {
+                objectGroup.remove(fallbackMesh); 
+                
+                const myModel = gltf.scene;
+                myModel.scale.set(1, 1, 1); 
+                
+                const box = new THREE.Box3().setFromObject(myModel);
+                const center = box.getCenter(new THREE.Vector3());
+                myModel.position.x += (myModel.position.x - center.x);
+                myModel.position.y += (myModel.position.y - center.y);
+                myModel.position.z += (myModel.position.z - center.z);
+                
+                objectGroup.add(myModel);
+                
+            }, undefined, function(error) {
+                console.error('Error al cargar el modelo ' + index + ':', error);
+            });
+        }
+
+        loadModel(0);
+
+        const buttons = document.querySelectorAll('.model-btn');
+        buttons.forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                buttons.forEach(b => b.classList.remove('active'));
+                e.target.classList.add('active');
+                
+                const modelIndex = parseInt(e.target.dataset.index);
+                loadModel(modelIndex);
+            });
+        });
+
+        let isDragging = false;
+        let previousMousePosition = { x: 0, y: 0 };
+
+        container.addEventListener('mousedown', () => isDragging = true);
+        window.addEventListener('mouseup', () => isDragging = false);
+        window.addEventListener('mouseleave', () => isDragging = false);
+        
+        container.addEventListener('mousemove', (e) => {
+            if (isDragging) {
+                const deltaMove = {
+                    x: e.offsetX - previousMousePosition.x,
+                    y: e.offsetY - previousMousePosition.y
+                };
+                objectGroup.rotation.y += deltaMove.x * 0.01;
+                objectGroup.rotation.x += deltaMove.y * 0.01;
+            }
+            previousMousePosition = { x: e.offsetX, y: e.offsetY };
+        });
+
+        function animate() {
+            requestAnimationFrame(animate);
+            if(!isDragging) {
+                objectGroup.rotation.y += 0.005;
+            }
+            renderer.render(scene, camera);
+        }
+        
+        animate();
+
+        window.addEventListener('resize', () => {
+            if(container.clientWidth > 0) {
+                camera.aspect = container.clientWidth / container.clientHeight;
+                camera.updateProjectionMatrix();
+                renderer.setSize(container.clientWidth, container.clientHeight);
+            }
+        });
+    </script>
+</body>
+</html>
